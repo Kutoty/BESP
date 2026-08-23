@@ -5,7 +5,6 @@ import { useScholarsStore } from '../../store/useScholarsStore';
 import { Link } from 'react-router-dom';
 import {
   Calendar,
-  Award,
   Upload,
   TrendingUp,
   Megaphone,

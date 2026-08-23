@@ -27,7 +27,6 @@ import {
   getMeanGradeColour,
   usesCbcGrading,
   cbcCodeToBand,
-  scoreToDisplayGrade,
   formatGradeLabel,
 } from '../../lib/utils';
 
@@ -196,14 +195,10 @@ const StudentDetail = () => {
             <XAxis dataKey="term" tick={{ fontSize: 12 }} />
             <YAxis domain={[40, 100]} tick={{ fontSize: 12 }} />
             <Tooltip
-              formatter={(value: number) => {
-                const g = scoreToDisplayGrade(value, student.schoolLevel);
-                const extra = isCbc ? cbcCodeToBand(g) : g;
-                return [
-                  isCbc ? extra : `${value}% (${extra})`,
-                  'Performance',
-                ];
-              }}
+              formatter={(value) => {
+  const num = typeof value === 'number' ? value : 0;
+  return [formatKsh(num), 'Amount'];
+}}
             />
             <Line
               type="monotone"
