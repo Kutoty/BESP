@@ -1,6 +1,6 @@
-# Mara Conservancy Scholars Programme
+# Borana Education Support Programme
 
-A professional scholarship management portal for the Mara Conservancy Scholars Programme.
+A professional scholarship management portal for the Borana Education Support Programme.
 
 Students can upload term results and fee structures, track academic performance, view announcements, and message administrators. Administrators can review submissions, manage scholars, post announcements, view analytics, and respond to messages.
 

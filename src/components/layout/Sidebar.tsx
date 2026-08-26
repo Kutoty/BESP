@@ -12,7 +12,6 @@ import {
   MessageCircle,
   TrendingUp,
   Upload,
-  Leaf,
   UserPlus,
 } from 'lucide-react';
 
@@ -75,19 +74,17 @@ const Sidebar = () => {
 
   return (
     <aside className="hidden md:flex w-72 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 h-screen fixed left-0 top-0 flex-col z-40">
-      <div className="p-6 border-b border-gray-200 dark:border-gray-800">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-emerald-600 rounded-2xl flex items-center justify-center text-white shadow-sm">
-            <Leaf className="w-5 h-5" />
-          </div>
-          <div>
-            <h1 className="text-lg font-bold tracking-tight text-gray-900 dark:text-white leading-tight">
-              Mara Conservancy
-            </h1>
-            <p className="text-xs text-emerald-600 font-medium">Scholars Programme</p>
-          </div>
-        </div>
-      </div>
+  <div className="px-5 py-6 border-b border-gray-200 dark:border-gray-800">
+   <div className="flex flex-col items-center gap-1.5">
+    <div className="w-30 h-15 flex items-center justify-center overflow-hidden">
+      <img
+        src="/Conservancy+logo+III.png"
+        alt="Borana Conservancy"
+        className="h-30 w-auto max-w-full object-contain"
+      />
+    </div>
+   </div>
+  </div>
 
       <nav className="flex-1 px-3 py-5 overflow-y-auto sidebar-scroll">
         <ul className="space-y-1">

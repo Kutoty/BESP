@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 export const ThemeToggle = () => {
   const [isDark, setIsDark] = useState(() => {
     if (typeof window === 'undefined') return false;
-    const stored = localStorage.getItem('mara-theme');
+    const stored = localStorage.getItem('besp-theme');
     if (stored) return stored === 'dark';
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
@@ -13,10 +13,10 @@ export const ThemeToggle = () => {
     const root = document.documentElement;
     if (isDark) {
       root.classList.add('dark');
-      localStorage.setItem('mara-theme', 'dark');
+      localStorage.setItem('besp-theme', 'dark');
     } else {
       root.classList.remove('dark');
-      localStorage.setItem('mara-theme', 'light');
+      localStorage.setItem('besp-theme', 'light');
     }
   }, [isDark]);
 

@@ -94,14 +94,11 @@ const PerformanceCurve = () => {
             <XAxis dataKey="term" tick={{ fontSize: 12 }} />
             <YAxis domain={[40, 100]} tick={{ fontSize: 12 }} />
             <Tooltip
-              formatter={(value) => {
-  const num = typeof value === 'number' ? value : Number(value) || 0;
-  // use `num` instead of `value` below
-  const g = scoreToDisplayGrade(num, level);
-return [`${num}% (${g})`, 'Performance'];
-  // ...
-  return [/* same as before */, 'Performance'];
-}}
+              formatter={(value: number) => {
+                const g = scoreToDisplayGrade(value, level);
+                const extra = usesCbcGrading(level) ? cbcCodeToBand(g) : g;
+                return [usesCbcGrading(level) ? extra : `${value}% (${extra})`, 'Performance'];
+              }}
             />
             <Line
               type="monotone"

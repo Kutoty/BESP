@@ -1,10 +1,14 @@
-import { LogOut, Bell } from 'lucide-react';
+import { LogOut, Bell, Menu } from 'lucide-react';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { useLocation, Link } from 'react-router-dom';
 import { useRoleStore } from '../../store/useRoleStore';
 import { useMessagesStore } from '../../store/useMessagesStore';
 import { useApplicationsStore } from '../../store/useApplicationsStore';
 import { useAnnouncementsStore } from '../../store/useAnnouncementsStore';
+
+interface TopBarProps {
+  onMenuClick?: () => void;
+}
 
 const pageTitles: Record<string, string> = {
   '/student': 'Dashboard',
@@ -21,7 +25,7 @@ const pageTitles: Record<string, string> = {
   '/admin/messages': 'Student Messages',
 };
 
-const TopBar = () => {
+const TopBar = ({ onMenuClick }: TopBarProps) => {
   const location = useLocation();
   const { currentRole, currentUser, logout } = useRoleStore();
   const { messages } = useMessagesStore();
@@ -64,12 +68,24 @@ const TopBar = () => {
   };
 
   return (
-    <header className="h-16 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-4 sm:px-6 lg:px-8 fixed right-0 left-0 md:left-72 top-0 z-30">
-      <h2 className="font-semibold text-lg sm:text-xl text-gray-900 dark:text-white truncate pr-4">
-        {getPageTitle()}
-      </h2>
+    <header className="h-16 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-3 sm:px-6 lg:px-8 fixed right-0 left-0 md:left-72 top-0 z-30">
+      <div className="flex items-center gap-2 min-w-0 flex-1">
+        {/* Mobile hamburger — only shows below md */}
+        <button
+          type="button"
+          onClick={onMenuClick}
+          className="md:hidden p-2.5 -ml-1 rounded-xl text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 shrink-0"
+          aria-label="Open menu"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
 
-      <div className="flex items-center gap-2 sm:gap-3">
+        <h2 className="font-semibold text-base sm:text-lg lg:text-xl text-gray-900 dark:text-white truncate pr-2">
+          {getPageTitle()}
+        </h2>
+      </div>
+
+      <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
         <Link
           to={notifLink}
           className="relative p-2.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors"
@@ -90,7 +106,7 @@ const TopBar = () => {
             <p className="text-sm font-medium text-gray-900 dark:text-white truncate max-w-[140px]">
               {currentUser?.name ?? `${currentRole} Portal`}
             </p>
-            <p className="text-xs text-gray-500">Mara Conservancy</p>
+            <p className="text-xs text-gray-500">Borana Education Support Programme</p>
           </div>
 
           <button

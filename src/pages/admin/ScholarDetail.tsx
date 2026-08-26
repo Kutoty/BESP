@@ -33,6 +33,7 @@ import {
   cbcCodeToBand,
   usesCbcGrading,
   getNextGradeStep,
+  scoreToDisplayGrade,
   formatGradeLabel,
 } from '../../lib/utils';
 
@@ -329,10 +330,14 @@ const ScholarDetail = () => {
             <XAxis dataKey="term" tick={{ fontSize: 12 }} />
             <YAxis domain={[40, 100]} tick={{ fontSize: 12 }} />
             <Tooltip
-              formatter={(value) => {
-  const num = typeof value === 'number' ? value : 0;
-  return [formatKsh(num), 'Amount'];
-}}
+              formatter={(value: number) => {
+                const g = scoreToDisplayGrade(value, scholar.schoolLevel);
+                const extra = isCbc ? cbcCodeToBand(g) : g;
+                return [
+                  isCbc ? extra : `${value}% (${extra})`,
+                  'Performance',
+                ];
+              }}
             />
             <Line
               type="monotone"

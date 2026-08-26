@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { useAnnouncementsStore } from './useAnnouncementsStore';
 import { useScholarsStore } from './useScholarsStore';
 import { getNextGradeStep, levelDisplayName } from '../lib/utils';
-import type { Application, ApplicationStatus, } from '../types';
+import type { Application, ApplicationStatus } from '../types';
 import { scoreToDisplayGrade, cbcCodeToBand, usesCbcGrading } from '../lib/utils';
 
 interface ApplicationsStore {
