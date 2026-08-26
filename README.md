@@ -31,7 +31,7 @@ Open [http://localhost:5173](http://localhost:5173).
 
 | Role    | Email                  | Password    |
 |---------|------------------------|-------------|
-| Admin   | admin@mara.org         | admin123    |
+| Admin   | admin@borana.org         | admin123    |
 | Student | aisha.m@email.com      | student123  |
 | Student | john.okoro@email.com   | student123  |
 
