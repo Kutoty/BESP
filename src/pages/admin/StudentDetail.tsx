@@ -196,7 +196,7 @@ const StudentDetail = () => {
             <XAxis dataKey="term" tick={{ fontSize: 12 }} />
             <YAxis domain={[40, 100]} tick={{ fontSize: 12 }} />
             <Tooltip
-              formatter={(value: number) => {
+              formatter={(value: any) => {
                 const g = scoreToDisplayGrade(value, student.schoolLevel);
                 const extra = isCbc ? cbcCodeToBand(g) : g;
                 return [

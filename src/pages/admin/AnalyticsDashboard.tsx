@@ -275,7 +275,7 @@ const AnalyticsDashboard = () => {
               }
             />
             <Tooltip
-              formatter={(value: number) => [formatKsh(value), 'Amount']}
+              formatter={(value: any) => [formatKsh(value), 'Amount']}
               cursor={{ fill: 'rgba(16,185,129,0.06)' }}
               contentStyle={{ borderRadius: 12, border: '1px solid #e5e7eb' }}
             />

@@ -94,7 +94,7 @@ const PerformanceCurve = () => {
             <XAxis dataKey="term" tick={{ fontSize: 12 }} />
             <YAxis domain={[40, 100]} tick={{ fontSize: 12 }} />
             <Tooltip
-              formatter={(value: number) => {
+              formatter={(value: any) => {
                 const g = scoreToDisplayGrade(value, level);
                 const extra = usesCbcGrading(level) ? cbcCodeToBand(g) : g;
                 return [usesCbcGrading(level) ? extra : `${value}% (${extra})`, 'Performance'];
