@@ -3,6 +3,7 @@ import { useRoleStore } from '../../store/useRoleStore';
 import { useScholarsStore } from '../../store/useScholarsStore';
 import { toast } from 'sonner';
 import { Eye, EyeOff, Leaf, Shield, GraduationCap } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const DEMO_ADMIN = {
   id: 0,
@@ -15,6 +16,7 @@ const DEMO_ADMIN = {
 const Login = () => {
   const { setRole } = useRoleStore();
   const { getScholarByEmail } = useScholarsStore();
+  const navigate = useNavigate(); // used to send user to the correct home page after login
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -28,6 +30,7 @@ const Login = () => {
     window.setTimeout(() => {
       const emailNorm = email.trim().toLowerCase();
 
+      // --- Admin login ---
       if (emailNorm === DEMO_ADMIN.email && password === DEMO_ADMIN.password) {
         setRole('admin', {
           id: DEMO_ADMIN.id,
@@ -36,10 +39,13 @@ const Login = () => {
           role: 'admin',
         });
         toast.success('Welcome back — BESP admin portal');
+        // Force URL to /admin so we don't stay on a previous /student page
+        navigate('/admin', { replace: true });
         setLoading(false);
         return;
       }
 
+      // --- Scholar / student login ---
       const scholar = getScholarByEmail?.(emailNorm);
       if (scholar && scholar.password === password) {
         setRole('student', {
@@ -51,12 +57,11 @@ const Login = () => {
           scholarId: scholar.id,
         });
         toast.success(`Karibu, ${scholar.fullName.split(' ')[0]}`);
+        // Force URL to /student so we don't stay on a previous /admin page
+        navigate('/student', { replace: true });
         setLoading(false);
         return;
       }
-
-      // Fallback if your BESP login used fixed demo students instead of scholars store:
-      // if (emailNorm === 'student@demo.com' && password === 'student123') { ... }
 
       toast.error('Invalid email or password');
       setLoading(false);
@@ -83,7 +88,7 @@ const Login = () => {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/25" />
-         <div className="relative z-10 h-full flex flex-col justify-between p-6 sm:p-10 lg:p-12 text-white min-h-[42vh] lg:min-h-screen">
+        <div className="relative z-10 h-full flex flex-col justify-between p-6 sm:p-10 lg:p-12 text-white min-h-[42vh] lg:min-h-screen">
           <div className="flex items-center gap-3">
             <div className="w-50 h-20 flex items-center justify-center overflow-hidden mx-auto">
               <img
@@ -92,11 +97,9 @@ const Login = () => {
                 className="w-100 h-20 object-contain"
               />
             </div>
-    
           </div>
 
           <div className="max-w-md space-y-4 pb-4 lg:pb-8">
-          
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
               Borana Education Support Programme
             </h1>

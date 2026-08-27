@@ -1,6 +1,6 @@
 import { LogOut, Bell, Menu } from 'lucide-react';
 import { ThemeToggle } from '../ui/ThemeToggle';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { useRoleStore } from '../../store/useRoleStore';
 import { useMessagesStore } from '../../store/useMessagesStore';
 import { useApplicationsStore } from '../../store/useApplicationsStore';
@@ -27,6 +27,7 @@ const pageTitles: Record<string, string> = {
 
 const TopBar = ({ onMenuClick }: TopBarProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { currentRole, currentUser, logout } = useRoleStore();
   const { messages } = useMessagesStore();
   const { applications } = useApplicationsStore();
@@ -64,13 +65,14 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
   const handleLogout = () => {
     if (window.confirm('Are you sure you want to sign out?')) {
       logout();
+      navigate('/', { replace: true }); // leave /admin or /student
     }
   };
 
   return (
-    <header className="h-16 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-3 sm:px-6 lg:px-8 fixed right-0 left-0 md:left-72 top-0 z-30">
+    <header className="h-16 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-b border-gray-200 dark:border-gray-800 flex items-center justify-between px-4 sm:px-6 lg:px-8 fixed right-0 left-0 md:left-72 top-0 z-30">
       <div className="flex items-center gap-2 min-w-0 flex-1">
-        {/* Mobile hamburger — only shows below md */}
+        {/* Mobile hamburger — opens the drawer. Hidden on desktop. */}
         <button
           type="button"
           onClick={onMenuClick}
@@ -80,12 +82,12 @@ const TopBar = ({ onMenuClick }: TopBarProps) => {
           <Menu className="w-6 h-6" />
         </button>
 
-        <h2 className="font-semibold text-base sm:text-lg lg:text-xl text-gray-900 dark:text-white truncate pr-2">
+        <h2 className="font-semibold text-lg sm:text-xl text-gray-900 dark:text-white truncate pr-4">
           {getPageTitle()}
         </h2>
       </div>
 
-      <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+      <div className="flex items-center gap-2 sm:gap-3 shrink-0">
         <Link
           to={notifLink}
           className="relative p-2.5 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-xl transition-colors"
