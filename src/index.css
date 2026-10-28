@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Dark styles apply ONLY if <html class="dark"> exists.
+   They will NOT follow the computer's dark mode. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary: #10b981;
   --color-primary-dark: #059669;
